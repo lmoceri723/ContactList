@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * A class that stores subclasses of Person as a contact list.
@@ -19,7 +20,7 @@ public class ContactList
     // TODO: Write a Constructor
     public ContactList()
     {
-
+        contacts = new ArrayList<Person>();
     }
 
     public void printMenuOptions() {
@@ -39,15 +40,55 @@ public class ContactList
      * Asks user for input to create and add a new Person
      * to the contact list
      */
-    public void addContact() {
+    public void addContact()
+    {
         // TODO: Complete the addContact method
+        Scanner s = new Scanner(System.in);
+        System.out.println("Select a type of contact to add:\n1. Student\n2. Worker");
+        int type = s.nextInt();
+        s.nextLine();
+
+        if (type != 1 && type != 2)
+        {
+            System.out.println("Invalid Type");
+            return;
+        }
+
+        System.out.println("First Name: ");
+        String first = s.nextLine();
+
+        System.out.println("Last Name: ");
+        String last = s.nextLine();
+
+        System.out.println("Phone Number: ");
+        String phone = s.nextLine();
+
+        if (type == 1)
+        {
+            System.out.println("Grade: ");
+            int grade = s.nextInt();
+            Person p = new Student(first, last, phone, grade);
+            contacts.add(p);
+        }
+        else
+        {
+            System.out.println("Job: ");
+            String job = s.nextLine();
+            Person p = new Worker(first, last, phone, job);
+            contacts.add(p);
+        }
     }
 
     /**
      * Loops through and prints all contacts
      */
-    public void printContacts() {
+    public void printContacts()
+    {
         // TODO: Complete the printContacts method
+        for (Person contact : contacts)
+        {
+            System.out.println(contact);
+        }
     }
 
     /**
@@ -79,9 +120,23 @@ public class ContactList
     public void run() {
         System.out.println("Welcome to your Contacts List");
         System.out.println("Please pick from the following menu options");
-        printMenuOptions();
+        Scanner s = new Scanner(System.in);
 
         // TODO: Complete the run method
+        while(true)
+        {
+            printMenuOptions();
+            int choice = s.nextInt();
+
+            switch(choice) {
+                case 1:
+                    addContact();
+                    break;
+                case 2:
+                    printContacts();
+                    break;
+            }
+        }
     }
 
 
