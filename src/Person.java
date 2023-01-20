@@ -3,17 +3,18 @@
  *
  * Created for Menlo School CS2
  *
- * @author: Ms. Namasivayam & Mr. Blick
+ * @author: Ms. Namasivayam, Mr. Blick, and Landon Moceri
  * @version: 2022-2023
  */
 
 public class Person
 {
-    // TODO: Complete the Person class
+    // Instance variables for the first name, last name, and number
     private String firstName;
     private String lastName;
     private String phoneNumber;
 
+    // Constructs a person object
     public Person (String first, String last, String phone)
     {
         firstName = first;
@@ -21,6 +22,7 @@ public class Person
         phoneNumber = phone;
     }
 
+    // Getters for the instance variables
     public String getFirstName()
     {
         return firstName;
@@ -36,9 +38,10 @@ public class Person
         return phoneNumber;
     }
 
+    // Overridden toString that prints information about the person
     @Override
     public String toString()
     {
-        return firstName + " " + lastName + " - " + phoneNumber;
+        return firstName + " " + lastName + " - #" + phoneNumber;
     }
 }

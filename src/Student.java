@@ -3,13 +3,12 @@
  *
  * Created for Menlo School CS2
  *
- * @author: Ms. Namasivayam & Mr. Blick
+ * @author: Ms. Namasivayam, Mr. Blick, and Landon Moceri
  * @version: 2022-2023
  */
 
 public class Student extends Person
 {
-    // TODO: Modify and complete this class
     private int grade;
 
     public Student (String first, String last, String phone, int grade)
