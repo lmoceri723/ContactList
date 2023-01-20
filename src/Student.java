@@ -9,19 +9,23 @@
 
 public class Student extends Person
 {
+    // Instance variable for grade
     private int grade;
 
+    // Constructs a student object
     public Student (String first, String last, String phone, int grade)
     {
         super(first, last, phone);
         this.grade = grade;
     }
 
+    // Getter for grade
     public int getGrade()
     {
         return grade;
     }
 
+    // Overridden toString that also prints the student's grade
     @Override
     public String toString()
     {

@@ -14,13 +14,17 @@ import java.util.Scanner;
 
 public class ContactList
 {
+    // ArrayList that holds the contacts
+    // Stores Person objects so that Workers and Students can both have the Person reference type and be stored
     private ArrayList<Person> contacts;
 
+    // Constructs a ContactList
     public ContactList()
     {
         contacts = new ArrayList<Person>();
     }
 
+    // Prints out the menu options
     public void printMenuOptions() {
         System.out.println("Menu: ");
         System.out.println("1. Add Contact");
@@ -35,7 +39,7 @@ public class ContactList
     }
 
     /**
-     * Asks user for input to create and add a new Person
+     * Asks user for input to create and add a new Worker/Student with reference type Person
      * to the contact list
      */
     public void addContact()
@@ -44,6 +48,7 @@ public class ContactList
         System.out.println("Select a type of contact to add:\n1. Student\n2. Worker");
 
         int type;
+        // Throws an error message when the user doesn't type an int
         try
         {
             type = s.nextInt();
@@ -55,6 +60,7 @@ public class ContactList
             return;
         }
 
+        // Throws an error message when the type is outside the valid range
         if (type != 1 && type != 2)
         {
             System.out.println("Invalid Type");
@@ -72,6 +78,7 @@ public class ContactList
 
         if (type == 1)
         {
+            // Creates a Student object and throws an error if the grade is not a number
             try
             {
                 System.out.println("Grade: ");
@@ -86,6 +93,7 @@ public class ContactList
         }
         else
         {
+            // Creates a Worker object
             System.out.println("Job: ");
             String job = s.nextLine();
             Person p = new Worker(first, last, phone, job);
@@ -114,8 +122,11 @@ public class ContactList
         int size = contacts.size();
         if (sortBy == 0)
         {
+            // Passes through contacts n (size) times
             for(int pass = 1; pass < size; pass++)
             {
+                // Moves the largest element to the end of the array each time
+                // Removes the last element from the next pass as its position is valid
                 for(int comp = 0; comp < size - pass; comp++)
                 {
                     String nameOne = contacts.get(comp).getFirstName();
@@ -130,6 +141,7 @@ public class ContactList
             }
 
         }
+        // Same methodology for both other sorting types, only conditions are different
         else if (sortBy == 1)
         {
             for(int pass = 1; pass < size; pass++)
@@ -167,7 +179,7 @@ public class ContactList
         }
     }
 
-    // TODO: Write searchByFirstName
+    // Searches contacts for a person with a matching first name
     public Person searchByFirstName(String name)
     {
         for (Person p : contacts)
@@ -180,7 +192,7 @@ public class ContactList
         return null;
     }
 
-    // TODO: Write searchByLastName
+    // Searches contacts for a person with a matching last name
     public Person searchByLastName(String name)
     {
         for (Person p : contacts)
@@ -193,7 +205,7 @@ public class ContactList
         return null;
     }
 
-    // TODO: Write searchByPhoneNumber
+    // Searches contacts for a person with a matching phone number
     public Person searchByPhoneNumber(String num)
     {
         for (Person p : contacts)
@@ -229,25 +241,36 @@ public class ContactList
         System.out.println("Please pick from the following menu options");
         Scanner s = new Scanner(System.in);
 
+
         while(true)
         {
+            // Prompts user for an option and returns error messages if it's out of the valid range or not an int
             printMenuOptions();
-            int choice = s.nextInt();
-            s.nextLine();
+
+            String input = s.nextLine();
+            // Checks if there are any non-ints in input
+            if (!input.matches("[0-9]+"))
+            {
+                input = "-1";
+            }
+            int choice = Integer.parseInt(input);
 
             switch(choice) {
                 case 1:
                     addContact();
                     break;
                 case 2:
+                    // Sorts contacts by first name and prints
                     sort(0);
                     printContacts();
                     break;
                 case 3:
+                    // Sorts contacts by last name and prints
                     sort(1);
                     printContacts();
                     break;
                 case 4:
+                    // Sorts contacts by phone number and prints
                     sort(2);
                     printContacts();
                     break;
@@ -255,6 +278,7 @@ public class ContactList
                     listStudents();
                     break;
                 case 6:
+                    // Prompts user for the first name and then prints the contact that matches with it
                     System.out.println("Enter a name: ");
                     String first = s.nextLine();
 
@@ -270,6 +294,7 @@ public class ContactList
                     break;
 
                 case 7:
+                    // Prompts user for the last name and then prints the contact that matches with it
                     System.out.println("Enter a name: ");
                     String last = s.nextLine();
 
@@ -284,6 +309,7 @@ public class ContactList
                     }
                     break;
                 case 8:
+                    // Prompts user for the phone number and then prints the contact that matches with it
                     System.out.println("Enter a phone number: ");
                     String num = s.nextLine();
 
@@ -299,6 +325,9 @@ public class ContactList
                     break;
                 case 0:
                     return;
+                default:
+                    System.out.println("Invalid Choice");
+                    break;
             }
         }
     }
